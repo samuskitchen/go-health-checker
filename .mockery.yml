@@ -1,0 +1,18 @@
+# .mockery.yml
+formatter: goimports
+force-file-write: true
+log-level: info
+structname: '{{.Mock}}{{.InterfaceName}}'
+template: testify
+
+packages:
+  github.com/samuskitchen/go-health-checker/domain:
+   config:
+     all: true
+     recursive: true
+     pkgname: _mocks
+     # <-- Here, relative to the root folder, without repeating "domain"
+     # Each source package creates its own folder under ./mocks/
+     dir: ./domain/mocks/{{.SrcPackageName}}
+     # Inside that folder, one file per interfaces:
+     filename: "mock_{{.InterfaceName}}.go"

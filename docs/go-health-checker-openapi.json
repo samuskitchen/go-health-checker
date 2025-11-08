@@ -1,0 +1,13 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is health checker API",
+        "title": "Swagger Data the Health Checker",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {},
+        "version": "0.1"
+    },
+    "host": "github.com/samuskitchen",
+    "basePath": "/api-health-checker",
+    "paths": {}
+}

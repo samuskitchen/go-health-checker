@@ -1,0 +1,10 @@
+basePath: /api-health-checker
+host: github.com/samuskitchen
+info:
+  contact: {}
+  description: This is health checker API
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Data the Health Checker
+  version: "0.1"
+paths: {}
+swagger: "2.0"

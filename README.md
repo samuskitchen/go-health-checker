@@ -5,6 +5,10 @@
 Before you begin, ensure you have met the following requirements:
 * You have installed the latest version 1.23.9 of [Go](https://go.dev/dl/)
 * You have installed [Docker](https://docs.docker.com/desktop/)
+* You have installed [Docker Compose](https://docs.docker.com/compose/install/)
+* You have installed [RabbitMQ](https://www.rabbitmq.com/docs/download/)
+* You have installed [Hazelcast](https://hazelcast.com/community-edition-projects/downloads/)
+* You have installed [PostgreSQL](https://www.postgresql.org/download/)
 
 ## Installation Dependencies
 ```bash
@@ -93,6 +97,7 @@ DB_USER=postgres
 DB_PASSWORD=admin
 DB_NAME=beer-api
 DB_HOST=localhost
+DB_HOST=host.docker.internal // Use for docker-compose
 DB_PORT=5432
 DB_MAX_OPEN=50
 DB_MAX_IDLE=25
@@ -106,11 +111,13 @@ SERVER_PORT=8080
 SERVER_POSTFIX=dev
 
 RABBITMQ_HOST=localhost
+RABBITMQ_HOST=host.docker.internal // Use for docker-compose
 RABBITMQ_PORT=5672
 RABBITMQ_USERNAME=guest
 RABBITMQ_PASSWORD=guest
 
 HAZEL_SERVER=localhost:5701
+HAZEL_SERVER=host.docker.internal:5701 // Use for docker-compose
 ```
 
 ### Execute go build

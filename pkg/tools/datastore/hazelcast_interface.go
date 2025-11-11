@@ -1,7 +1,7 @@
-// Package data_store provides a generic interface and helper types
+// Package datastore provides a generic interface and helper types
 // to connect to and operate against a Hazelcast cluster in a
 // typed and configurable way.
-package data_store
+package datastore
 
 import (
 	"context"

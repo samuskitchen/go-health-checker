@@ -6,13 +6,24 @@ structname: '{{.Mock}}{{.InterfaceName}}'
 template: testify
 
 packages:
-  github.com/samuskitchen/go-health-checker/domain:
+  github.com/samuskitchen/go-health-checker/beer:
    config:
      all: true
      recursive: true
      pkgname: _mocks
-     # <-- Here, relative to the root folder, without repeating "domain"
+     # <-- Here, relative to the root folder, without repeating "beer"
      # Each source package creates its own folder under ./mocks/
-     dir: ./domain/mocks/{{.SrcPackageName}}
+     dir: ./beer/mocks/{{.SrcPackageName}}
      # Inside that folder, one file per interfaces:
      filename: "mock_{{.InterfaceName}}.go"
+
+  github.com/samuskitchen/go-health-checker/pkg/tools:
+    config:
+      all: true
+      recursive: true
+      pkgname: _mocks
+      # <-- Here, relative to the root folder, without repeating "tools"
+      # Each source package creates its own folder under ./mocks/
+      dir: ./pkg/tools/mocks/{{.SrcPackageName}}
+      # Inside that folder, one file per interfaces:
+      filename: "mock_{{.InterfaceName}}.go"

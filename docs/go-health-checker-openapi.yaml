@@ -1,10 +1,60 @@
 basePath: /api-health-checker
-host: github.com/samuskitchen
+definitions:
+  beer_handler.errorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  github_com_samuskitchen_go-health-checker_beer_model.BeersResponse:
+    properties:
+      brewery:
+        description: Producer brewery
+        type: string
+      country:
+        description: Country of origin
+        type: string
+      created_at:
+        description: Creation date
+        type: string
+      currency:
+        description: Currency code
+        type: string
+      id:
+        description: Unique beer identifier
+        type: integer
+      name:
+        description: Beer name
+        type: string
+      price:
+        description: Unit price
+        type: number
+      updated_at:
+        description: Last update date
+        type: string
+    type: object
+host: localhost:8080
 info:
   contact: {}
   description: This is health checker API
   termsOfService: http://swagger.io/terms/
   title: Swagger Data the Health Checker
   version: "0.1"
-paths: {}
+paths:
+  /beers:
+    get:
+      description: Get all beers
+      operationId: GetAllBeersHandler
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/github_com_samuskitchen_go-health-checker_beer_model.BeersResponse'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/beer_handler.errorResponse'
+      tags:
+      - Beer
 swagger: "2.0"

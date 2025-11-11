@@ -1,6 +1,6 @@
-// Package data_store provides in-memory data storage clients such as Redis and Hazelcast,
+// Package datastore provides in-memory data storage clients such as Redis and Hazelcast,
 // designed for high-performance caching, temporary data persistence, and low-latency access.
-package data_store
+package datastore
 
 import (
 	"context"

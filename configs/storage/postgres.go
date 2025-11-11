@@ -9,7 +9,7 @@ import (
 
 	"github.com/samuskitchen/go-health-checker/pkg/kit/enums"
 	modelConnection "github.com/samuskitchen/go-health-checker/pkg/tools/models"
-	"github.com/samuskitchen/go-health-checker/pkg/tools/sql_connection"
+	"github.com/samuskitchen/go-health-checker/pkg/tools/sqlconnection"
 
 	"github.com/rs/zerolog/log"
 )
@@ -45,7 +45,7 @@ func getConnections() {
 		MaxIdleTimeCon: os.Getenv(enums.PostgresMaxIdleTime),
 	}
 
-	conn, err := sql_connection.NewConnector().Connect(dbParams)
+	conn, err := sqlconnection.NewConnector().Connect(dbParams)
 	if err != nil {
 		log.Error().Msgf("error connecting to database: %v", err)
 	}

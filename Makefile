@@ -32,7 +32,7 @@ swag:
 
 .PHONY: go-test
 # Define here all the route patterns you want to test
-PKG_PATHS := ./domain/... ./pkg/...
+PKG_PATHS := ./beer/... ./pkg/...
 
 # 1) We list all packages from those sources
 # 2) We filter those that DO NOT contain “/mocks/”

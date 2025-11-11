@@ -1,3 +1,5 @@
+// Package main is the main package of the application.
+// Loads environment variables, configures DI, logger, routes, and servers.
 package main
 
 import (
@@ -7,14 +9,15 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/samuskitchen/go-health-checker/configs/cache"
-	events "github.com/samuskitchen/go-health-checker/configs/event"
 	"github.com/samuskitchen/go-health-checker/configs/generals/injector"
 	"github.com/samuskitchen/go-health-checker/configs/generals/router"
 	"github.com/samuskitchen/go-health-checker/configs/storage"
 	"github.com/samuskitchen/go-health-checker/pkg/kit/enums"
 	kitZeroLog "github.com/samuskitchen/go-health-checker/pkg/kit/logger/zerolog"
 	serverEcho "github.com/samuskitchen/go-health-checker/pkg/tools/server"
+
+	// Swagger auto-generated documentation
+	_ "github.com/samuskitchen/go-health-checker/docs"
 
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
@@ -27,7 +30,7 @@ import (
 // @tag Health Checker
 // @description This is health checker API
 // @termsOfService http://swagger.io/terms/
-// @host github.com/samuskitchen
+// @host localhost:8080
 // @BasePath /api-health-checker
 func main() {
 	// Load the dependency injection container.
@@ -51,18 +54,13 @@ func main() {
 	// Configure server times
 	configureServerTimes()
 
-	err := container.Invoke(func(
-		server *echo.Echo,
-		route *router.Router,
-		db *storage.Data,
-		hazelcast *cache.Cache,
-		rabbit *events.RabbitEvent,
-	) {
+	err := container.Invoke(func(server *echo.Echo, route *router.Router) {
 		address := fmt.Sprintf("%s:%s", os.Getenv(enums.ServerHost), os.Getenv(enums.ServerPort))
 		server.Debug = os.Getenv(enums.ServerPostfix) == enums.PostfixDev
 		route.Init()
 		server.Logger.Fatal(server.Start(address))
 	})
+
 	if err != nil {
 		panic(err)
 	}

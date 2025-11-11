@@ -1,3 +1,7 @@
+// Package logger provides middleware and helper utilities
+// for structured logging in Echo applications.
+// It maps request and response data into consistent log fields
+// for observability and debugging purposes.
 package logger
 
 import (

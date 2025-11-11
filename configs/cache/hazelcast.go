@@ -8,7 +8,7 @@ import (
 	"sync"
 
 	"github.com/samuskitchen/go-health-checker/pkg/kit/enums"
-	hazelcast "github.com/samuskitchen/go-health-checker/pkg/tools/data_store"
+	hazelcast "github.com/samuskitchen/go-health-checker/pkg/tools/datastore"
 	modelCache "github.com/samuskitchen/go-health-checker/pkg/tools/models"
 
 	"github.com/rs/zerolog/log"

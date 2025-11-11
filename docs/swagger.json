@@ -7,7 +7,81 @@
         "contact": {},
         "version": "0.1"
     },
-    "host": "github.com/samuskitchen",
+    "host": "localhost:8080",
     "basePath": "/api-health-checker",
-    "paths": {}
+    "paths": {
+        "/beers": {
+            "get": {
+                "description": "Get all beers",
+                "tags": [
+                    "Beer"
+                ],
+                "operationId": "GetAllBeersHandler",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/github_com_samuskitchen_go-health-checker_beer_model.BeersResponse"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/beer_handler.errorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "beer_handler.errorResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_samuskitchen_go-health-checker_beer_model.BeersResponse": {
+            "type": "object",
+            "properties": {
+                "brewery": {
+                    "description": "Producer brewery",
+                    "type": "string"
+                },
+                "country": {
+                    "description": "Country of origin",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "Creation date",
+                    "type": "string"
+                },
+                "currency": {
+                    "description": "Currency code",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Unique beer identifier",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "Beer name",
+                    "type": "string"
+                },
+                "price": {
+                    "description": "Unit price",
+                    "type": "number"
+                },
+                "updated_at": {
+                    "description": "Last update date",
+                    "type": "string"
+                }
+            }
+        }
+    }
 }

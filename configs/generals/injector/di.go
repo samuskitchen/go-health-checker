@@ -1,8 +1,12 @@
+// Package injector dependency injection
 package injector
 
 import (
 	"fmt"
 
+	"github.com/samuskitchen/go-health-checker/beer/handler"
+	"github.com/samuskitchen/go-health-checker/beer/repository"
+	"github.com/samuskitchen/go-health-checker/beer/service"
 	"github.com/samuskitchen/go-health-checker/configs/cache"
 	events "github.com/samuskitchen/go-health-checker/configs/event"
 	"github.com/samuskitchen/go-health-checker/configs/generals/router"
@@ -29,6 +33,15 @@ func BuildContainer() *dig.Container {
 	// Router / Server
 	checkError(Container.Provide(echo.NewServer))
 	checkError(Container.Provide(router.NewRouter))
+
+	// Handlers
+	checkError(Container.Provide(handler.NewBeerHandler))
+
+	// Services
+	checkError(Container.Provide(service.NewBeerService))
+
+	// Repository
+	checkError(Container.Provide(repository.NewBeerRepository))
 
 	return Container
 }

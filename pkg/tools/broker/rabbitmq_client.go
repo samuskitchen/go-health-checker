@@ -19,12 +19,11 @@ import (
 // for safe parallel consumption and publishing.
 // It is not intended to be used directly; use the NewClient constructor and the Client interface for best results.
 type clientImpl struct {
-	connection         *amqp.Connection   // Underlying AMQP connection
-	channel            *amqp.Channel      // AMQP channel for operations
-	mu                 sync.Mutex         // Mutex for thread safety on connection/channel
-	params             tools.Params       // Connection parameters
-	bufferedDeliveries chan amqp.Delivery // Internal buffered channel for deliveries (for worker pool)
-	closeCh            chan struct{}      // Used to close goroutines and signal shutdown
+	connection *amqp.Connection // Underlying AMQP connection
+	channel    *amqp.Channel    // AMQP channel for operations
+	mu         sync.Mutex       // Mutex for thread safety on connection/channel
+	params     tools.Params     // Connection parameters
+	closeCh    chan struct{}    // Used to close goroutines and signal shutdown
 }
 
 // NewClient returns a new concurrent-safe RabbitMQ client.

@@ -7,8 +7,12 @@ import (
 	"os"
 	"strings"
 
+	"github.com/samuskitchen/go-health-checker/beer/handler"
 	"github.com/samuskitchen/go-health-checker/pkg/kit/enums"
 	kitZeroLog "github.com/samuskitchen/go-health-checker/pkg/kit/logger/zerolog"
+
+	// Echo es el framework web utilizado para definir rutas y handlers.
+	echoSwagger "github.com/swaggo/echo-swagger"
 
 	"github.com/labstack/echo/v4"
 	middlewareEcho "github.com/labstack/echo/v4/middleware"
@@ -18,7 +22,8 @@ import (
 
 // Router struct for handling routing with echo-go
 type Router struct {
-	server *echo.Echo
+	server      *echo.Echo
+	beerHandler handler.BeerHandler // Handler que delega la lógica de BeerService
 }
 
 type healthCheckResponse struct {
@@ -26,9 +31,10 @@ type healthCheckResponse struct {
 }
 
 // NewRouter constructor for routing with echo-go
-func NewRouter(server *echo.Echo) *Router {
+func NewRouter(server *echo.Echo, beerHandler handler.BeerHandler) *Router {
 	return &Router{
-		server,
+		server:      server,
+		beerHandler: beerHandler,
 	}
 }
 
@@ -58,6 +64,10 @@ func (r *Router) Init() {
 	apiGroup := r.server.Group(enums.BasePath)
 
 	apiGroup.GET(enums.HealthPath, healthCheckHandler)
+	apiGroup.GET("/docs/*", echoSwagger.WrapHandler)
+
+	// Endpoints de Beer
+	apiGroup.GET("/beers", r.beerHandler.GetAllBeersHandler)
 
 	for _, router := range r.server.Routes() {
 		log.Info().Msgf("[%s] %s", router.Method, router.Path)

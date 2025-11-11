@@ -1,5 +1,5 @@
-// Package sql_connection provides a client to interact with PostgreSQL
-package sql_connection
+// Package sqlconnection provides a client to interact with PostgreSQL
+package sqlconnection
 
 import (
 	"database/sql"

@@ -90,9 +90,8 @@ Generate all mocks with expected feat include, see official documentation. This 
 ```
 
 ## Run application
-
-prior to execution, you must include the following environment variables
-```
+Before execution, you must include the following environment variables
+```env
 DB_USER=postgres
 DB_PASSWORD=admin
 DB_NAME=beer-api
@@ -119,6 +118,7 @@ RABBITMQ_PASSWORD=guest
 HAZEL_SERVER=localhost:5701
 HAZEL_SERVER=host.docker.internal:5701 // Use for docker-compose
 ```
+> **💡 Tip:** Never commit `.env` files to version control.
 
 ### Execute go build
 ```bash

@@ -102,17 +102,38 @@ type MockClient_ConnectLocal_Call struct {
 }
 
 // ConnectLocal is a helper method to define mock.On call
-//   - host
-//   - port
-//   - user
-//   - password
+//   - host string
+//   - port string
+//   - user string
+//   - password string
 func (_e *MockClient_Expecter) ConnectLocal(host interface{}, port interface{}, user interface{}, password interface{}) *MockClient_ConnectLocal_Call {
 	return &MockClient_ConnectLocal_Call{Call: _e.mock.On("ConnectLocal", host, port, user, password)}
 }
 
 func (_c *MockClient_ConnectLocal_Call) Run(run func(host string, port string, user string, password string)) *MockClient_ConnectLocal_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(string), args[1].(string), args[2].(string), args[3].(string))
+		var arg0 string
+		if args[0] != nil {
+			arg0 = args[0].(string)
+		}
+		var arg1 string
+		if args[1] != nil {
+			arg1 = args[1].(string)
+		}
+		var arg2 string
+		if args[2] != nil {
+			arg2 = args[2].(string)
+		}
+		var arg3 string
+		if args[3] != nil {
+			arg3 = args[3].(string)
+		}
+		run(
+			arg0,
+			arg1,
+			arg2,
+			arg3,
+		)
 	})
 	return _c
 }

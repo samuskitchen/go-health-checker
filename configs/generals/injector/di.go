@@ -34,6 +34,9 @@ func BuildContainer() *dig.Container {
 	checkError(Container.Provide(echo.NewServer))
 	checkError(Container.Provide(router.NewRouter))
 
+	// Health Check
+	checkError(Container.Provide(router.NewHealthHandler))
+
 	// Handlers
 	checkError(Container.Provide(handler.NewBeerHandler))
 

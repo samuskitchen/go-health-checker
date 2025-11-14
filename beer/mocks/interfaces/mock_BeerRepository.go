@@ -72,14 +72,20 @@ type MockBeerRepository_GetAllBeers_Call struct {
 }
 
 // GetAllBeers is a helper method to define mock.On call
-//   - ctx
+//   - ctx context.Context
 func (_e *MockBeerRepository_Expecter) GetAllBeers(ctx interface{}) *MockBeerRepository_GetAllBeers_Call {
 	return &MockBeerRepository_GetAllBeers_Call{Call: _e.mock.On("GetAllBeers", ctx)}
 }
 
 func (_c *MockBeerRepository_GetAllBeers_Call) Run(run func(ctx context.Context)) *MockBeerRepository_GetAllBeers_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(context.Context))
+		var arg0 context.Context
+		if args[0] != nil {
+			arg0 = args[0].(context.Context)
+		}
+		run(
+			arg0,
+		)
 	})
 	return _c
 }

@@ -59,14 +59,20 @@ type MockBeerHandler_GetAllBeersHandler_Call struct {
 }
 
 // GetAllBeersHandler is a helper method to define mock.On call
-//   - c
+//   - c echo.Context
 func (_e *MockBeerHandler_Expecter) GetAllBeersHandler(c interface{}) *MockBeerHandler_GetAllBeersHandler_Call {
 	return &MockBeerHandler_GetAllBeersHandler_Call{Call: _e.mock.On("GetAllBeersHandler", c)}
 }
 
 func (_c *MockBeerHandler_GetAllBeersHandler_Call) Run(run func(c echo.Context)) *MockBeerHandler_GetAllBeersHandler_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(echo.Context))
+		var arg0 echo.Context
+		if args[0] != nil {
+			arg0 = args[0].(echo.Context)
+		}
+		run(
+			arg0,
+		)
 	})
 	return _c
 }

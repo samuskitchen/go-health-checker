@@ -3,7 +3,6 @@
 package router
 
 import (
-	"net/http"
 	"os"
 	"strings"
 
@@ -22,19 +21,17 @@ import (
 
 // Router struct for handling routing with echo-go
 type Router struct {
-	server      *echo.Echo
-	beerHandler handler.BeerHandler // Handler que delega la lógica de BeerService
-}
-
-type healthCheckResponse struct {
-	Status string `json:"status"`
+	server        *echo.Echo
+	beerHandler   handler.BeerHandler // Handler que delega la lógica de BeerService
+	healthHandler HealthHandler
 }
 
 // NewRouter constructor for routing with echo-go
-func NewRouter(server *echo.Echo, beerHandler handler.BeerHandler) *Router {
+func NewRouter(server *echo.Echo, beerHandler handler.BeerHandler, healthHandler HealthHandler) *Router {
 	return &Router{
-		server:      server,
-		beerHandler: beerHandler,
+		server:        server,
+		beerHandler:   beerHandler,
+		healthHandler: healthHandler,
 	}
 }
 
@@ -63,7 +60,7 @@ func (r *Router) Init() {
 
 	apiGroup := r.server.Group(enums.BasePath)
 
-	apiGroup.GET(enums.HealthPath, healthCheckHandler)
+	apiGroup.GET(enums.HealthPath, r.healthHandler.HealthChecker)
 	apiGroup.GET("/docs/*", echoSwagger.WrapHandler)
 
 	// Endpoints de Beer
@@ -72,9 +69,4 @@ func (r *Router) Init() {
 	for _, router := range r.server.Routes() {
 		log.Info().Msgf("[%s] %s", router.Method, router.Path)
 	}
-}
-
-// healthCheckHandler is a handler function that returns the health status of the server.
-func healthCheckHandler(c echo.Context) error {
-	return c.JSON(http.StatusOK, healthCheckResponse{Status: "ok"})
 }

@@ -1,5 +1,5 @@
-// Package heathcheck provides a health checker for various clients
-package heathcheck
+// Package healthcheck provides a health checker for various clients
+package healthcheck
 
 import (
 	"context"

@@ -7,7 +7,7 @@ import (
 	"github.com/samuskitchen/go-health-checker/configs/cache"
 	events "github.com/samuskitchen/go-health-checker/configs/event"
 	"github.com/samuskitchen/go-health-checker/configs/storage"
-	"github.com/samuskitchen/go-health-checker/pkg/tools/heathcheck"
+	"github.com/samuskitchen/go-health-checker/pkg/tools/healthcheck"
 )
 
 type healthHandler struct {
@@ -42,7 +42,7 @@ func NewHealthHandler(clientPg *storage.Data, clientHazelcast *cache.Cache,
 func (hh *healthHandler) HealthChecker(c echo.Context) error {
 	ctx := c.Request().Context()
 
-	clients := heathcheck.Clients{
+	clients := healthcheck.Clients{
 		RabbitClient:    hh.clientRabbit.RabbitMQClient,
 		HazelcastClient: hh.clientHazelcast.Hazelcast,
 		PgClient:        hh.clientPg.DB,
